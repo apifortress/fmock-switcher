@@ -6,18 +6,18 @@
 ]]
 
 local BasePlugin = require "kong.plugins.base_plugin"
-local access = require "kong.plugins.fmock-switcher.access"
-local FMockSwitcherHandler = BasePlugin:extend()
+local access = require "kong.plugins.upstream-replace.access"
+local UpstreamReplaceHandler = BasePlugin:extend()
 
-FMockSwitcherHandler.PRIORITY = 10
+UpstreamReplaceHandler.PRIORITY = 10
 
-function FMockSwitcherHandler:new()
-	FMockSwitcherHandler.super.new(self, "fmock-switcher")
+function UpstreamReplaceHandler:new()
+	UpstreamReplaceHandler.super.new(self, "upstream-replace")
 end
 
-function FMockSwitcherHandler:access(conf)
-  FMockSwitcherHandler.super.access(self)
+function UpstreamReplaceHandler:access(conf)
+  UpstreamReplaceHandler.super.access(self)
   access.execute(conf)
 end
 
-return FMockSwitcherHandler
+return UpstreamReplaceHandler
