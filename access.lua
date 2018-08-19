@@ -6,7 +6,6 @@
 ]]
 
 local url = require "socket.url"
-local zlib = require 'zlib'
 local _M = {}
 
 local function buildHostHeader(host,port)
@@ -43,9 +42,12 @@ local function detectPort(explicitPort,scheme)
   return 80
 end
 
+local function hasValue(string)
+  return string ~= nil and string ~= ''
+end
+
 function _M.execute(conf)
-  local mock = ngx.req.get_headers()["x-mock"]
-  if mock~=nil and mock=="true" then
+  if hasValue(ngx.req.get_headers()[conf.header_name]) then
     local u = url.parse(conf.replacement_url)
     local host = u.host
     local scheme = u.scheme

@@ -7,6 +7,7 @@
 
 return {
   fields = {
-    replacement_url = { required = true, type = "url" }
+    replacement_url = { required = true, type = "url" },
+    header_name = { required = true, type = "string"}
   }
 }
